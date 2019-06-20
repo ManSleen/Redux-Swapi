@@ -1,4 +1,22 @@
 // we'll need axios
+import axios from "axios";
+
+export const FETCH_DATA_START = "FETCH_DATA_START";
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
+
+export const getCharacter = () => dispatch => {
+  dispatch({ type: FETCH_DATA_START });
+  axios
+    .get("https://swapi.co/api/people/")
+    .then(res => {
+      console.log(res.data.results);
+      dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data.results });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 // we'll need to create 3 different action types here.
 // one for fetching, one for success and one for failure
